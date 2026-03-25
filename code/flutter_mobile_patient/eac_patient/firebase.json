@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "patient-fc05b",
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

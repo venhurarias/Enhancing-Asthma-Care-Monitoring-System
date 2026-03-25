@@ -1,0 +1,11 @@
+{
+  "projects": {
+    "default": "asthma-care"
+  },
+  "targets": {
+    "asthma-care": {
+      "hosting": {}
+    }
+  },
+  "etags": {}
+}
