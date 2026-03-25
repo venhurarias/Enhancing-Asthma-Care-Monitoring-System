@@ -1,25 +1,27 @@
 # Enhancing Asthma Care Monitoring System
 
-This project is an IoT-based healthcare system designed to assist in monitoring asthma conditions using real-time physiological data. It integrates an ESP32 device, cloud database (Firebase), a web platform, and an AI-powered prediction system to provide intelligent health insights.
+This project is an IoT-based healthcare system designed to assist in monitoring asthma conditions using real-time physiological data. It integrates an ESP32 device, cloud database (Firebase), a web platform, a Flutter mobile application, and an AI-powered prediction system to provide intelligent health insights.
 
-The system measures **heart rate (BPM)**, **oxygen saturation (SpO2)**, and **peak flow rate**, then sends the data to a server where an AI model analyzes the condition and returns predictions. A web application is also included for real-time monitoring, communication, and patient management.
+The system measures **heart rate (BPM)**, **oxygen saturation (SpO2)**, and **peak flow rate**, then sends the data to a server where an AI model analyzes the condition and returns predictions. Both web and mobile platforms allow real-time monitoring, communication, and patient management.
 
 ---
 
 ## Project Overview
 
-The system consists of four main components:
+The system consists of five main components:
 
 1. **ESP32 Device (Embedded System)**
 2. **Firebase Realtime Database (Cloud Storage)**
 3. **AI Server (Flask + Machine Learning)**
-4. **Web Application (Monitoring + Communication Platform)**
+4. **Web Application (Doctor + Admin Platform)**
+5. **Flutter Mobile App (Patient Application)**
 
 It is designed to:
 - monitor vital signs in real time  
 - assist asthma patients in tracking breathing conditions  
 - provide intelligent predictions using AI  
-- enable doctor-patient interaction through web platform  
+- enable doctor-patient interaction  
+- support mobile and web-based monitoring  
 - store and visualize health data remotely  
 
 ---
@@ -47,7 +49,7 @@ It is designed to:
   - SpO2
   - Peak flow
 - Uses device UID for structured data storage
-- Enables synchronization across device, AI, and web
+- Enables synchronization across device, AI, web, and mobile
 
 ---
 
@@ -58,7 +60,7 @@ It is designed to:
   - time (hour, minute)
   - BPM
   - SpO2
-- Returns prediction shown on device and web
+- Returns prediction shown on device, web, and mobile
 
 ---
 
@@ -73,45 +75,85 @@ It is designed to:
 
 ### 🌐 WiFi Connectivity
 - Connects ESP32 to internet
-- Enables real-time synchronization with Firebase and AI server
+- Enables real-time synchronization
 
 ---
 
-## 🌍 Web Application Features
-
-A full web system is integrated into this project to support monitoring and healthcare interaction.
+## 🌍 Web Application Features (Doctor Platform)
 
 ### 📊 Real-Time Patient Dashboard
-- Displays:
-  - Live BPM, SpO2, and Peak Flow readings
-  - Historical data and trends
-- Updates automatically via Firebase
+- Displays live patient data (BPM, SpO2, Peak Flow)
+- Shows historical trends and AI predictions
 
 ---
 
 ### 📞 Video Call System
-- Enables real-time doctor-patient consultation  
-- Uses token-based communication (Agora integration)  
-- Secure session handling  
+- Real-time doctor-patient consultation  
+- Uses token-based communication (Agora)  
 
 ---
 
 ### 💬 Chat System
-- Real-time messaging between patient and doctor  
-- Useful for follow-ups and monitoring  
+- Real-time messaging between doctor and patient  
 
 ---
 
 ### 📅 Appointment System
-- Schedule consultations between patients and doctors  
-- Manage appointment history and availability  
+- Schedule and manage consultations  
+- View appointment history  
 
 ---
 
 ### 🧾 Patient Data Management
 - Stores patient readings and history  
-- Allows doctors to review condition over time  
-- Integrated with AI prediction results  
+- Integrated with AI results  
+
+---
+
+## 📱 Flutter Mobile App (Patient Application)
+
+The system includes a dedicated **Flutter mobile application** for patients.
+
+### 📊 Real-Time Monitoring
+- View live:
+  - BPM
+  - SpO2
+  - Peak flow readings  
+
+---
+
+### 📈 Health History
+- Displays historical data  
+- Allows patients to track progress over time  
+
+---
+
+### 🔔 Notifications
+- Receives alerts based on AI predictions or abnormal readings  
+
+---
+
+### 💬 Chat with Doctor
+- Communicate directly with healthcare providers  
+
+---
+
+### 📞 Join Video Consultation
+- Join scheduled video calls from the app  
+
+---
+
+### 📅 Appointment Management
+- Book and manage doctor appointments  
+- View schedules and reminders  
+
+---
+
+### 📡 Firebase Sync
+- Real-time data sync between:
+  - ESP32 device  
+  - Mobile app  
+  - Web system  
 
 ---
 
@@ -119,44 +161,41 @@ A full web system is integrated into this project to support monitoring and heal
 
 ### 1. Device Startup
 - Connects to WiFi  
-- Initializes sensors and OLED display  
+- Initializes sensors and OLED  
 - Authenticates with Firebase  
 
 ---
 
-### 2. Monitoring Mode (Normal Mode)
+### 2. Monitoring Mode
 - Reads:
   - Heart rate
-  - SpO2
-- Displays values on screen  
+  - SpO2  
+- Displays on device  
 - Sends data to Firebase  
 
 ---
 
 ### 3. AI Prediction
-- Sends collected data to Flask API:  POST /predict
-- Server processes data using trained model  
-- Returns prediction (health status)  
-- Result is displayed on OLED and web dashboard  
+- Sends data to Flask API:  POST /predict
+- AI processes data  
+- Returns prediction  
+- Displayed on device, web, and mobile  
 
 ---
 
 ### 4. Peak Flow Mode
 - Triggered via Firebase flag (`onPF`)  
 - User performs blowing action  
-- Flow meter detects airflow pulses  
+- Flow meter detects airflow  
 - Calculates peak flow rate  
-- Displays result and stores in Firebase  
+- Saves to Firebase  
 
 ---
 
-### 5. Web Monitoring & Interaction
-- Doctors monitor patient data in real time  
-- Patients can:
-- view their health data  
-- chat with doctors  
-- join video consultations  
-- schedule appointments  
+### 5. Remote Monitoring
+- Doctors use web platform  
+- Patients use mobile app  
+- Both access real-time and historical data  
 
 ---
 
@@ -190,8 +229,6 @@ A full web system is integrated into this project to support monitoring and heal
 
 ### 📟 I2C Devices (Shared Bus)
 
-Both the OLED and MAX30102 share the same I2C lines:
-
 - SDA → GPIO 21  
 - SCL → GPIO 22  
 
@@ -224,10 +261,18 @@ Both the OLED and MAX30102 share the same I2C lines:
 ---
 
 ### Web Application
-- Real-time dashboard (Firebase-based)  
-- Video call integration (Agora)  
+- Dashboard (real-time monitoring)  
+- Video call (Agora)  
 - Chat system  
-- Appointment scheduling  
+- Appointment system  
+
+---
+
+### Mobile Application (Flutter)
+- Real-time health monitoring  
+- Chat and video call  
+- Appointment management  
+- Notifications  
 
 ---
 
@@ -244,27 +289,23 @@ Both the OLED and MAX30102 share the same I2C lines:
 ---
 
 ### `/token`
-- Generates token for video call sessions  
+- Generates token for video calls  
 
 ---
 
 ## Notes
 
-- Uses interrupt-based flow measurement for accuracy  
+- Uses interrupt-based flow measurement  
 - AI model dynamically trains from Firebase data  
-- Supports:
-- Vital signs monitoring  
-- Peak flow measurement  
-- Web platform enhances usability and remote care  
+- Multi-platform system (Device + Web + Mobile)  
 
 ---
 
 ## Limitations
 
 - Requires stable internet connection  
-- AI accuracy depends on dataset quality  
-- No offline prediction capability  
-- SpO2 may be simulated in current version  
+- AI accuracy depends on dataset  
+- No offline mode  
 
 ---
 
@@ -277,9 +318,22 @@ This project demonstrates a complete **IoT healthcare ecosystem** that combines:
 - cloud database (Firebase)  
 - AI prediction (Machine Learning)  
 - web-based telehealth platform  
+- Flutter mobile application  
 
 It is suitable for:
 - asthma monitoring  
 - remote patient care  
 - telemedicine systems  
-- smart healthcare solutions  
+- smart healthcare solutions
+
+## Images/Screenshots
+![Image 1](images/image_1.jpg)
+![Image 1](images/image_2.jpg)
+![Image 1](images/image_3.jpg)
+![Image 1](images/image_4.jpg)
+![Screen_1](images/screenshot_2.jpg)
+![Screen_2](images/screenshot_1.jpg)
+![Screen_3](images/screenshoot_8.jpg)
+![Screen_4](images/screenshot_6.jpg)
+![Screen_5](images/screenshot_3.jpg)
+
