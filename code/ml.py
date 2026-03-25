@@ -10,14 +10,14 @@ import pytz #pag convert ng UTC to GMT+8
 
 #config para makaconnect tayo sa firebase, makukuha ninyo ito sa console sa setup
 firebaseConfig = {
-  "apiKey": "AIzaSyDa7cOSfulYwus9qWyLsh2x4VFqzlIxURM",
-  "authDomain": "asthma-care.firebaseapp.com",
-  "databaseURL": "https://asthma-care-default-rtdb.asia-southeast1.firebasedatabase.app",
-  "projectId": "asthma-care",
-  "storageBucket": "asthma-care.appspot.com",
-  "messagingSenderId": "73254897805",
-  "appId": "1:73254897805:web:a03b8f29fd62e28fdb3ac4",
-  "measurementId": "G-NX6RNH2VM3"
+  "apiKey": "ADD_YOUR_API_KEY",
+  "authDomain": "ADD_YOUR_AUTH_DOMAIN",
+  "databaseURL": "ADD_YOUR_DATABASE_URL",
+  "projectId": "ADD_YOUR_PROJECT_ID",
+  "storageBucket": "ADD_YOUR_STORAGE_BUCKET",
+  "messagingSenderId": "ADD_YOUR_MESSAGING_SENDER_ID",
+  "appId": "ADD_YOUR_APP_ID",
+  "measurementId": "ADD_YOUR_MEASUREMENT_ID"
 };
 
 #pag initialize natin sa firebase para magconnect
